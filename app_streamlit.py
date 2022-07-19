@@ -45,3 +45,16 @@ elif app_mode == 'Predict_Churn':
 
     results = np.array(features).reshape(1, -1)
     
+    
+if st.button("Predict"):
+
+    picklefile = open("emp-model.pkl", "rb")
+    model = pickle.load(picklefile)
+
+    prediction = model.predict(results)
+    if prediction[0] == 0:
+        st.success('Employee will not churn')
+    elif prediction[0] == 1:
+        st.error( 'Employee will churn')
+        
+        

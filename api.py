@@ -11,12 +11,16 @@ import xgboost
 app = Flask(__name__)
     # name= '__main__' if run directly. if imported: name of file
 app.config["DEBUG"] = True
+    # lance le débogueur, ce qui permet d’afficher un message autre que 
+    #    « Bad Gateway » s’il y a une erreur dans l’application
 
 
 # the decorator associates a function to a url
+# flask envoie des requêtes http à des fonctions (routage)
 @app.route('/')
 def start():
-    return('P7 API running')
+    return('<h1>P7 API running</h1>')
+    # will be displayed on the root page: http://localhost:5000/
 
 
 @app.route('/predict', methods=['POST'])
@@ -32,7 +36,7 @@ def predict():
     prediction = model.predict(cust.values)  #don't forget .values !!!
     print(prediction)
 
-    return jsonify({'score': str(prediction)})
+    return jsonify({'score': str(prediction)})  #to json format
 
 
 
