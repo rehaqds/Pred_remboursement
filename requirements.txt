@@ -47,8 +47,6 @@ jupyterlab-widgets==1.1.1
 MarkupSafe==2.1.1
 matplotlib-inline==0.1.2
 mistune==0.8.4
-mkl-random==1.2.2
-mkl-service==2.4.0
 nbclient==0.6.6
 nbconvert==6.5.0
 nbformat==5.4.0
