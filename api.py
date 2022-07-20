@@ -37,12 +37,11 @@ def start():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    print(2222)
     json_ = request.json
     # json_ = json.loads(json_.decode("utf-8"))
     print(json_)
     #cust = test_df[test_df['SK_ID_CURR'] == json_['id']]
-    ###cust = test_df.loc[[json_['id']]]
+    cust = test_df.loc[[json_['id']]]
     #cust = train_df.loc[[json_['id']]]
     # cust = train_df.iloc[[0]]   
         # need a list to get a df and not a series size (53,)
