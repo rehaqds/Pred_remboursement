@@ -6,6 +6,9 @@
 import requests
 
 # res = requests.post('http://localhost:5000/predict', json={"id":400377}) #train
-res = requests.post('http://localhost:5000/predict', json={'id':30000}) #test
+# res = requests.post('http://localhost:5000/predict', json={'id':30000}) #test
+res = requests.post('https://bank-app-oc.herokuapp.com//predict', 
+                    json={'id':30000}) #test
 if res.ok:
     print(res.json())
+print(res.ok, res)

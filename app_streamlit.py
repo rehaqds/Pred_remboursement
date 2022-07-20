@@ -2,18 +2,23 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle, joblib
+import requests
 
 
 test_df = joblib.load('test_df.jlb')
 
 app_mode = st.sidebar.selectbox('Select Page',['Home','Predict_Churn'])
 
+# Page Home
 if app_mode=='Home': 
     st.title('Employee Prediction') 
     st.markdown('Dataset :') 
     #df=pd.read_csv('emp_analytics.csv') #Read our data dataset
     st.write(test_df.head()) 
     
+
+
+# Page predict    
 elif app_mode == 'Predict_Churn':
 ## specify our inputs
     st.subheader('Fill in employee details to get prediction ')
@@ -48,13 +53,18 @@ elif app_mode == 'Predict_Churn':
     
 if st.button("Predict"):
 
-    picklefile = open("emp-model.pkl", "rb")
-    model = pickle.load(picklefile)
+    # picklefile = open("emp-model.pkl", "rb")
+    # model = pickle.load(picklefile)
 
-    prediction = model.predict(results)
-    if prediction[0] == 0:
-        st.success('Employee will not churn')
-    elif prediction[0] == 1:
-        st.error( 'Employee will churn')
+    # prediction = model.predict(results)
+    # if prediction[0] == 0:
+    #     st.success('Employee will not churn')
+    # elif prediction[0] == 1:
+    #     st.error( 'Employee will churn')
         
+    res = requests.post('https://bank-app-oc.herokuapp.com//predict', 
+                        json={'id':30000}) #test
+    #if res.ok:
+    st.write(res.ok)
+    st.write(res)#.json())
         
