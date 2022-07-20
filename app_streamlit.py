@@ -66,5 +66,5 @@ if st.button("Predict"):
                         json={'id':30000}) #test
     #if res.ok:
     st.write(res.ok)
-    st.write(res)#.json())
+    st.write(res.json())
         
