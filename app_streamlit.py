@@ -15,7 +15,7 @@ import seaborn as sns
 
 
 
-CLOUD = False  # True: deployment on the cloud / False: local
+CLOUD = True  # True: deployment on the cloud / False: local
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 # mpl.rcParams["font.size"] = 3
