@@ -127,16 +127,18 @@ def display_results(res):
 
     # vals= np.round(np.abs(shap_df[row_n].values), 6)
     vals = np.round(np.abs(shap_df.loc[customer_id].values), 6)
-    feat_imp = pd.DataFrame(list(zip(test_df.columns, vals)),
+    feat_imp = pd.DataFrame(list(zip(feature_names, vals)),
                             columns=['col_name', 'feature_importance_vals'])
     feat_imp.sort_values(by=['feature_importance_vals'], ascending=False,
                          inplace=True)
     # st.write(feat_imp[:10])
     # st.write(feat_imp['col_name'], feat_imp.iloc[0]['col_name'])
+    # st.write(shap_df[:10])
 
     var_plot = st.multiselect('Choose the features to plot',
                               feat_imp['col_name'],
-                              feat_imp.iloc[0]['col_name'])
+                              'EXT_SOURCE_1')
+                              # feat_imp.iloc[0]['col_name'])
                               # feature_names, feature_names[0])
     full_train = pd.concat([train_df, Y_df], axis=1)
 
@@ -167,8 +169,9 @@ def display_results(res):
     st.markdown('### Cross-comparison on 2 factors:')
     var_bi = st.multiselect('Choose the 2 factors to plot',
                             feat_imp['col_name'],
-                            [feat_imp.iloc[0]['col_name'],
-                             feat_imp.iloc[1]['col_name']],
+                            ['EXT_SOURCE_1', 'EXT_SOURCE_2'],
+                            # [feat_imp.iloc[0]['col_name'],
+                            #  feat_imp.iloc[1]['col_name']],
     )
     # g3 = sns.jointplot(x=full_train[var_bi[0]],
     #                    y=full_train[var_bi[1]],
@@ -238,7 +241,7 @@ with col2:
 _, col2b, _ = st.sidebar.columns([0.5, 1, 0.5])  # to center the selectbox
 with col2b:
     customer_id = st.selectbox('Select the customer ID',
-                               test_df.index)
+                               test_df.index, index=8)
 
 # _, col2c, _ = st.sidebar.columns([1,1,1])
 # with col2c:
