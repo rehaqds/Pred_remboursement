@@ -21,7 +21,7 @@ from flask import Flask, request, jsonify
 
 
 
-THRESHOLD1 = 0.065
+THRESHOLD1 = 0.16  # 0.065
 
 
 # Your API definition

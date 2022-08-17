@@ -87,8 +87,8 @@ def display_results(res):
 
     # SHAP plots
 
-    st.markdown('### Influence of the top factors about the decision '
-                'for the customer (local):')
+    st.markdown('### Influence of the top factors concerning the decision '
+                'for the customer:')
     row_n = test_df.index.get_loc(customer_id)  # get line n°
     # explainer = shap.TreeExplainer(model)
     # shap_values = explainer(test_df)  # w/ cache?
@@ -114,7 +114,7 @@ def display_results(res):
     # st.write(shap_values[row_n].values)
     # feature_names2 = test_df.columns[
     #     np.argsort(np.abs(shap_values[row_n].values))]
-    # feature_names = shap_values[row_n].feature_names  # ordered by shap????
+    # feature_names = shap_values[row_n].feature_names  # ordered by shap?
     # st.write(feature_names[:5])
     # st.write(feature_names2[:5])
 
@@ -139,19 +139,22 @@ def display_results(res):
 
     fig = None
     for var in var_plot:
+        fig, ax = plt.subplots(figsize=(3, 3))
         g2 = sns.kdeplot(data=full_train, x=var, hue='TARGET',
-                         common_norm=False)
+                         common_norm=False, ax=ax)
         val_cust = test_df.loc[customer_id, var]
         g2.axvline(x=val_cust, color='g', ls='--', label='cust')
         fig = plt.gcf()
-        fig.set_size_inches(2, 0.5)  # fig.set_dpi(500)
+        fig.set_size_inches(8, 3)  # ; fig.set_dpi(100)
         st.pyplot()  # fig)
 
     st.write('')
-    st.write('Target 0 : clients with no payment difficulties')
-    st.write('Target 1 : clients with payment difficulties: late payment more'
-             'than X days on at least one of the first Y installments of the'
+    st.write('Target 0 (blue): clients with no payment difficulties')
+    st.write('Target 1 (orange): clients with payment difficulties: '
+             'late payment more than X days on at least one of '
+             'the first Y installments of the '
              'loan in our sample')
+    st.write('Green dashed line : client')
     st.write('') ; st.write('')
 
 
@@ -175,8 +178,10 @@ def display_results(res):
     # g3.ax_joint.set_xlim(-0.01, 1.0) ; g.ax_joint.set_ylim(-0.01, 1.0)
 
     g3 = sns.JointGrid(data=full_train, x=var_bi[0], y=var_bi[1],
-                       hue='TARGET', palette='Set1',  # kind="kde"
-                       height=8, ratio=8, xlim=(-0.01, 1.0), ylim=(-0.01, 1.0))
+                       hue='TARGET',  # palette='Set1',  # kind="kde"
+                       height=8, ratio=8,
+                       # xlim=(-0.01, 1.0), ylim=(-0.01, 1.0)
+                       )
     g3.plot_joint(sns.scatterplot, marker="s", s=20)
     g3.plot_marginals(sns.kdeplot, common_norm=False)
     g3.ax_joint.scatter(x=test_df.loc[customer_id, var_bi[0]],
@@ -199,13 +204,17 @@ def display_results(res):
     # Best global features for the model (based on permutation importance)
 
     st.markdown('### Influence of the top factors '
-                'on the model (global):')
-    g4 = plot_global_imp(shap_values_train, train_df)
-    # plt.gcf().axes[-1].set_aspect(100)
-    # plt.gcf().axes[-1].set_box_aspect(100)
-    # fig = plt.gcf() ; fig.set_size_inches(2,0.5) #; fig.set_dpi(500)
-    st.pyplot(g4)
-    st.write('') ; st.write('')
+                'for the model (global):')
+    # g4 = plot_global_imp(shap_values_train, train_df)
+    # # plt.gcf().axes[-1].set_aspect(100)
+    # # plt.gcf().axes[-1].set_box_aspect(100)
+    # # fig = plt.gcf() ; fig.set_size_inches(2,0.5) #; fig.set_dpi(500)
+    # st.pyplot(g4)
+    # st.write('') ; st.write('')
+
+    # Use image to speed up
+    image_shap = Image.open('img/shap_global_importance.png')
+    st.image(image_shap, width=900)  # , caption='', width=200)
 
 
 
@@ -255,6 +264,7 @@ if CLOUD:
 else:
     res0 = requests.post('http://localhost:5000/predict',
                          json={'id': customer_id})
+# print(res0.json())
 display_results(res0.json())
 
 
