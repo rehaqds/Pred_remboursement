@@ -15,7 +15,7 @@ import seaborn as sns
 
 
 
-CLOUD = True  # True: deployment on the cloud / False: local
+CLOUD = False  # True: deployment on the cloud / False: local
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 # mpl.rcParams["font.size"] = 3
@@ -32,18 +32,20 @@ def get_shap(model, train_df, test_df):
     # shap_values_train = explainer.shap_values(train_df)
 
     # if load shap from pickle
-    shap_values, exp_shap_values, shap_values_train = \
+    # shap_values, exp_shap_values, shap_values_train = \
+    (shap_values, exp_shap_values) = \
         joblib.load('data/shap.jlb')
-    return shap_values, exp_shap_values, shap_values_train
+    return shap_values, exp_shap_values  # , shap_values_train
+    # exp_shap_values = joblib.load('data/shap.jlb')
+    # return exp_shap_values
 
-
-# @st.cache
-def plot_global_imp(shap_values_train, train_df):
-    """."""
-    g4 = shap.summary_plot(shap_values_train, train_df, plot_size=(12, 8),
-                           # show=False
-                           )
-    return g4  # , plt.gcf()
+# # @st.cache
+# def plot_global_imp(shap_values_train, train_df):
+#     """."""
+#     g4 = shap.summary_plot(shap_values_train, train_df, plot_size=(12, 8),
+#                            # show=False
+#                            )
+#     return g4  # , plt.gcf()
 
 
 def calc_score(x, seuil):
@@ -92,9 +94,10 @@ def display_results(res):
     row_n = test_df.index.get_loc(customer_id)  # get line n°
     # explainer = shap.TreeExplainer(model)
     # shap_values = explainer(test_df)  # w/ cache?
-    shap_values, exp_shap_values, shap_values_train = \
+    # shap_values, exp_shap_values, shap_values_train = \
+    shap_values, exp_shap_values = \
         get_shap(model, train_df, test_df)
-
+    # exp_shap_values = get_shap(model, train_df, test_df)
 
     # Waterfall plot
 
