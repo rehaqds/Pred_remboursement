@@ -95,7 +95,7 @@ def display_results(res):
     # explainer = shap.TreeExplainer(model)
     # shap_values = explainer(test_df)  # w/ cache?
     # shap_values, exp_shap_values, shap_values_train = \
-    (shap_values, exp_shap_values, _) = \
+    (shap_values, exp_shap_values) = \
         get_shap(model, train_df, test_df)
     # exp_shap_values = get_shap(model, train_df, test_df)
 
