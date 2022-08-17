@@ -33,9 +33,9 @@ def get_shap(model, train_df, test_df):
 
     # if load shap from pickle
     # shap_values, exp_shap_values, shap_values_train = \
-    (shap_values, exp_shap_values) = \
+    shap_values, exp_shap_values = \
         joblib.load('data/shap.jlb')
-    return shap_values, exp_shap_values  # , shap_values_train
+    return (shap_values, exp_shap_values)  # , shap_values_train
     # exp_shap_values = joblib.load('data/shap.jlb')
     # return exp_shap_values
 
@@ -95,7 +95,7 @@ def display_results(res):
     # explainer = shap.TreeExplainer(model)
     # shap_values = explainer(test_df)  # w/ cache?
     # shap_values, exp_shap_values, shap_values_train = \
-    shap_values, exp_shap_values = \
+    (shap_values, exp_shap_values, _) = \
         get_shap(model, train_df, test_df)
     # exp_shap_values = get_shap(model, train_df, test_df)
 
