@@ -1,14 +1,13 @@
 # En mode debugging (et non deploiement)
 # To test my json api:
-# - run this in a second instance of spyder
-#   !! actually don't need a 2nd spyder, just a 2nd CLI!
-#   after launching the streamlit server (local) on the 1st spyder kernel
+# - run this in a second CLI
+#   after launching the streamlit server (local) on the 1st CLI
 #   (could also download the tool postman to test api)
-# - open a new anaconda CLI + conda activate oc_p7(choose environment displayed
+# - open a new anaconda CLI + conda activate oc_p7 (choose env. displayed
 #   at bottom right in Spyder) + cd...(copy paste from adress at top of Spyder)
 # Run streamlit in local, in another anaconda CLI:
 #   streamlit run app_streamlit.py (will open the app in the browser)
-# In both api and streamlit may need to write back the localhost urls
+# In both api and streamlit files may need to write back the localhost urls
 
 
 import requests
