@@ -144,4 +144,15 @@ URL du Dashboard : https://rehaqds-oc-p7-app-streamlit-m672oa.streamlitapp.com/
 
 ## 10. Conclusion
 
+Le « features engineering » pourrait être amélioré et des fonctionnalités pourraient être ajoutées à l’application. Par exemple, la
+possibilité de changer une ou des variables concernant un client et de recalculer son score en conséquence.
+
+Il pourrait être pertinent d’entraîner un modèle différent suivant le type et le montant des crédits : emprunt immobilier d’un montant
+élevé ou crédit à la consommation d’un montant moindre.
+
+Afin de valider les résultats de l’application, il conviendrait d’avoir le retour de différents experts de l’établissement financier. En
+particulier sur les 3 points suivants :
+- Les coûts et bénéfices associés aux 4 éléments de la matrice de confusion (TN/TP/FN/FP).
+- La pertinence et la complétude des éléments produits par le dashboard.
+- La possibilité d’utiliser toutes les variables disponibles (genre, âge, …) d’un point de vue éthique et légal.
 
