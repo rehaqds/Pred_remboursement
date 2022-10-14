@@ -132,7 +132,7 @@ importantes dans les prédictions d’un modèle d’apprentissage automatique.
 ![image](https://user-images.githubusercontent.com/108366684/195105640-26cb968a-9b9a-4abb-ab90-02a354ab4662.png)
 
 
-## 8.Déploiement de l’application
+## 9. Déploiement de l’application
 
 L’interface graphique du Dashboard intéractif a été créée avec Streamlit et a été déployée sur le cloud via
 Streamlit Share. Le Dashboard calcule le score pour le client sélectionné en passant par une API mise en place
@@ -140,4 +140,8 @@ avec Flask et déployé via Heroku.
 ![image](https://user-images.githubusercontent.com/108366684/195106209-1088d739-4098-4550-b7ed-edffdafc08aa.png)
 
 URL du Dashboard : https://rehaqds-oc-p7-app-streamlit-m672oa.streamlitapp.com/
+
+
+## 10. Conclusion
+
 
